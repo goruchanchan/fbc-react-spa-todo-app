@@ -1,0 +1,29 @@
+.row-list {
+  display: flex;
+  justify-content: left;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.row-list .item {
+  width: 200px;
+}
+
+.wrap {
+  display: flex;
+  flex-flow: column;
+}
+
+textarea {
+  height: 150px;
+  border-radius: 1ch;
+}
+
+.content {
+  margin-top: 5px;
+}
+
+button {
+  border-radius: 1ch;
+  width: 50%;
+}
