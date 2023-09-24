@@ -1,7 +1,10 @@
 li {
   list-style: none;
-  text-decoration: underline;
   color: blue;
   padding-block: 4px;
   margin-left: 5px;
+}
+
+li .edit-todo {
+  text-decoration: underline;
 }

@@ -1,12 +1,18 @@
 import "./ViewBoard.css";
 
-export function ViewBoard() {
+export function ViewBoard({ todos }) {
+  for (const todo of todos) {
+    console.log(todo.content);
+  }
+
   return (
     <>
-      <li>a</li>
-      <li>b</li>
-      <li>c</li>
-      <li>d</li>
+      {todos.map((todo) => (
+        <li key={todo.id}>
+          <div className="edit-todo">{todo.content}</div>
+        </li>
+      ))}
+      <li>+</li>
     </>
   );
 }

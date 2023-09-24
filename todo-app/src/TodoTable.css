@@ -6,6 +6,10 @@
   height: 200px;
 }
 
+h2{
+  color:rgb(106, 105, 105);
+}
+
 .TodoTable{
   margin-left: 20px;
 }
