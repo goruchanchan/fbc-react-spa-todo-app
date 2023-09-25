@@ -6,11 +6,11 @@ import { TodoTable } from "./TodoTable";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const todos = [
-  { id: 1, content: "hoge", editing: false },
-  { id: 2, content: "foo", editing: true },
-  { id: 3, content: "bar", editing: false },
-  { id: 4, content: "hogehoge\nhogehoge", editing: false },
-  { id: 5, content: "foo\nbar", editing: false },
+  { id: 0, content: "hoge", editing: false },
+  { id: 1, content: "foo", editing: true },
+  { id: 2, content: "bar", editing: false },
+  { id: 3, content: "hogehoge\nhogehoge", editing: false },
+  { id: 4, content: "foo\nbar", editing: false },
 ];
 
 root.render(

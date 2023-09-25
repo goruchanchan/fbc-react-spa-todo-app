@@ -1,6 +1,6 @@
 import "./ViewBoard.css";
 
-export function ViewBoard({ todos }) {
+export function ViewBoard({ todos, onSetEditingTodoId }) {
   function extractFirstLine(todo) {
     return todo.split(/\n/)[0];
   }
@@ -9,7 +9,12 @@ export function ViewBoard({ todos }) {
     <>
       {todos.map((todo) => (
         <li key={todo.id}>
-          <div className="edit-todo">{extractFirstLine(todo.content)}</div>
+          <button
+            className="UniqueLink"
+            onClick={() => onSetEditingTodoId(todo.id)}
+          >
+            <div className="edit-todo">{extractFirstLine(todo.content)}</div>
+          </button>
         </li>
       ))}
       <li>+</li>

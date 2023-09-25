@@ -2,21 +2,31 @@ import { ViewBoard } from "./ViewBoard";
 import { useState } from "react";
 import "./EditBoard.css";
 
-export function EditBoard({ todos }) {
-  const [editingText, setEditingText] = useState(todos[3].content);
+export function EditBoard({ todos, onSetEditingTodoId, id }) {
+  const editingIndex = todos.findIndex((todo) => todo.id === id);
 
-  function changeTextarea(e) {
+  const [editingText, setEditingText] = useState(
+    editingIndex !== -1 ? todos[editingIndex].content : ""
+  );
+  const [editingId, setEditingId] = useState(id);
+
+  if (id !== editingId) {
+    setEditingId(id);
+    setEditingText(todos[editingIndex].content);
+  }
+
+  function updateTextarea(e) {
     setEditingText(e.target.value);
   }
 
   return (
     <div className="row-list">
       <div className="item">
-        <ViewBoard todos={todos} />
+        <ViewBoard todos={todos} onSetEditingTodoId={onSetEditingTodoId} />
       </div>
       <div className="item">
         <div className="wrap">
-          <textarea value={editingText} onChange={(e) => changeTextarea(e)} />
+          <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
           <div className="content">
             <button>編集</button>
             <button>削除</button>
