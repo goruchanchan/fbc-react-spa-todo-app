@@ -1,8 +1,7 @@
 import "./ViewBoard.css";
 
 export function ViewBoard({ todos }) {
-
-  function extractFirstLine(todo){
+  function extractFirstLine(todo) {
     return todo.split(/\n/)[0];
   }
 
