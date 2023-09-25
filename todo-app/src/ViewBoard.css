@@ -8,3 +8,10 @@ li {
 li .edit-todo {
   text-decoration: underline;
 }
+
+.UniqueLink {
+  color: blue;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+}
