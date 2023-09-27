@@ -5,7 +5,7 @@ import { useState } from "react";
 import "./TodoTable.css";
 
 export function TodoTable({ localStorageTodos }) {
-  const [editingTodoId, setEditingTodoId] = useState(2);
+  const [editingTodoId, setEditingTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
 
   function updateTodos(updatedTodo) {
