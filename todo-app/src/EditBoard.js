@@ -2,9 +2,14 @@ import { ViewBoard } from "./ViewBoard";
 import { useState } from "react";
 import "./EditBoard.css";
 
-export function EditBoard({ todos, onSetEditingTodoId, onUpdateTodos, id }) {
+export function EditBoard({
+  todos,
+  onSetEditingTodoId,
+  onUpdateTodos,
+  onDeleteTodo,
+  id,
+}) {
   const editingIndex = todos.findIndex((todo) => todo.id === id);
-
   const [editingText, setEditingText] = useState(
     editingIndex !== -1 ? todos[editingIndex].content : ""
   );
@@ -12,7 +17,7 @@ export function EditBoard({ todos, onSetEditingTodoId, onUpdateTodos, id }) {
 
   if (id !== editingId) {
     setEditingId(id);
-    setEditingText(todos[editingIndex].content);
+    setEditingText(id !== null ? todos[editingIndex].content : "");
   }
 
   function updateTextarea(e) {
@@ -42,7 +47,7 @@ export function EditBoard({ todos, onSetEditingTodoId, onUpdateTodos, id }) {
             >
               編集
             </button>
-            <button>削除</button>
+            <button onClick={() => onDeleteTodo(editingId)}>削除</button>
           </div>
         </div>
       </div>

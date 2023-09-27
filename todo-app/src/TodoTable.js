@@ -15,6 +15,12 @@ export function TodoTable({ localStorageTodos }) {
     setTodos(updatedTodos);
   }
 
+  function deleteTodo(deleteTodoId) {
+    const updatedTodos = todos.filter((todo) => todo.id !== deleteTodoId);
+    setTodos(updatedTodos);
+    setEditingTodoId(null);
+  }
+
   return (
     <div className="TodoTable">
       <h2>一覧</h2>
@@ -27,6 +33,7 @@ export function TodoTable({ localStorageTodos }) {
           todos={todos}
           onSetEditingTodoId={setEditingTodoId}
           onUpdateTodos={updateTodos}
+          onDeleteTodo={deleteTodo}
           id={editingTodoId}
         />
       </div>
