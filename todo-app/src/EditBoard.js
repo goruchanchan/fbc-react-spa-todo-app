@@ -37,7 +37,6 @@ export function EditBoard({ todos, onSetEditingTodoId, onUpdateTodos, id }) {
                 onUpdateTodos({
                   id: editingId,
                   content: editingText,
-                  editing: false,
                 })
               }
             >
