@@ -15,6 +15,6 @@ const todos = [
 
 root.render(
   <React.StrictMode>
-    <TodoTable todos={todos} />
+    <TodoTable localStorageTodos={todos} />
   </React.StrictMode>
 );

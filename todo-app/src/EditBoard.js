@@ -2,7 +2,7 @@ import { ViewBoard } from "./ViewBoard";
 import { useState } from "react";
 import "./EditBoard.css";
 
-export function EditBoard({ todos, onSetEditingTodoId, id }) {
+export function EditBoard({ todos, onSetEditingTodoId, onUpdateTodos, id }) {
   const editingIndex = todos.findIndex((todo) => todo.id === id);
 
   const [editingText, setEditingText] = useState(
@@ -28,7 +28,17 @@ export function EditBoard({ todos, onSetEditingTodoId, id }) {
         <div className="wrap">
           <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
           <div className="content">
-            <button>編集</button>
+            <button
+              onClick={() =>
+                onUpdateTodos({
+                  id: editingId,
+                  content: editingText,
+                  editing: false,
+                })
+              }
+            >
+              編集
+            </button>
             <button>削除</button>
           </div>
         </div>
