@@ -15,3 +15,11 @@ li .edit-todo {
   border: none;
   text-align: left;
 }
+
+.NoLink {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  text-align: left;
+}

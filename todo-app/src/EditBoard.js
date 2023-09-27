@@ -22,7 +22,11 @@ export function EditBoard({ todos, onSetEditingTodoId, onUpdateTodos, id }) {
   return (
     <div className="row-list">
       <div className="item">
-        <ViewBoard todos={todos} onSetEditingTodoId={onSetEditingTodoId} />
+        <ViewBoard
+          todos={todos}
+          onSetEditingTodoId={onSetEditingTodoId}
+          editingId={id}
+        />
       </div>
       <div className="item">
         <div className="wrap">
