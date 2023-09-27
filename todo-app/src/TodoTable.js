@@ -9,9 +9,9 @@ export function TodoTable({ localStorageTodos }) {
   const [todos, setTodos] = useState(localStorageTodos);
 
   function updateTodos(updatedTodo) {
-    const updatedTodos = todos.map((todo) => {
-      return todo.id === updatedTodo.id ? updatedTodo : todo;
-    });
+    const updatedTodos = todos.map((todo) =>
+      todo.id === updatedTodo.id ? updatedTodo : todo
+    );
     setTodos(updatedTodos);
   }
 
@@ -27,7 +27,7 @@ export function TodoTable({ localStorageTodos }) {
       <div className="Board">
         <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
       </div>
-      <h2>編集</h2>
+      <h2>{editingTodoId === null ? "新規作成" : "編集"}</h2>
       <div className="Board">
         <EditBoard
           todos={todos}

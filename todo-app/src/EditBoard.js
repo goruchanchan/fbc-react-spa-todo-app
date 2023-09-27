@@ -37,17 +37,23 @@ export function EditBoard({
         <div className="wrap">
           <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
           <div className="content">
-            <button
-              onClick={() =>
-                onUpdateTodos({
-                  id: editingId,
-                  content: editingText,
-                })
-              }
-            >
-              編集
-            </button>
-            <button onClick={() => onDeleteTodo(editingId)}>削除</button>
+            {editingId === null ? (
+              <button onClick={() => null}>新規作成</button>
+            ) : (
+              <>
+                <button
+                  onClick={() =>
+                    onUpdateTodos({
+                      id: editingId,
+                      content: editingText,
+                    })
+                  }
+                >
+                  編集
+                </button>
+                <button onClick={() => onDeleteTodo(editingId)}>削除</button>
+              </>
+            )}
           </div>
         </div>
       </div>
