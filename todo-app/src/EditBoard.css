@@ -27,3 +27,8 @@ button {
   border-radius: 1ch;
   width: 50%;
 }
+
+.error {
+  color: red;
+  margin-top: 5px;
+}

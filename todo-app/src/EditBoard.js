@@ -15,19 +15,39 @@ export function EditBoard({
     editingIndex !== -1 ? todos[editingIndex].content : ""
   );
   const [editingId, setEditingId] = useState(id);
+  const [noInput, setNoInput] = useState(undefined);
 
   if (id !== editingId) {
     setEditingId(id);
     setEditingText(id !== null ? todos[editingIndex].content : "");
+    setNoInput(null);
   }
 
   function updateTextarea(e) {
     setEditingText(e.target.value);
+    setNoInput(e.target.value === "" ? true : false);
   }
 
-  function addTodo(){
-    onAddTodos(editingText)
-    setEditingText("")
+  function addTodo() {
+    if (noInput === undefined) {
+      setNoInput(true);
+      return;
+    }
+    if (noInput) return;
+
+    onAddTodos(editingText);
+    setNoInput(editingText === "" ? true : false);
+    setEditingText("");
+  }
+
+  function updateTodos() {
+    if (noInput) return;
+
+    const todo = {
+      id: editingId,
+      content: editingText,
+    };
+    onUpdateTodos(todo);
   }
 
   return (
@@ -47,20 +67,12 @@ export function EditBoard({
               <button onClick={() => addTodo()}>新規作成</button>
             ) : (
               <>
-                <button
-                  onClick={() =>
-                    onUpdateTodos({
-                      id: editingId,
-                      content: editingText,
-                    })
-                  }
-                >
-                  編集
-                </button>
+                <button onClick={() => updateTodos()}>編集</button>
                 <button onClick={() => onDeleteTodo(editingId)}>削除</button>
               </>
             )}
           </div>
+          {noInput ? <div className="error">空入力は禁止です</div> : ""}
         </div>
       </div>
     </div>
