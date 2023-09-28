@@ -8,6 +8,15 @@ export function TodoTable({ localStorageTodos }) {
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
 
+  function maxId() {
+    return Math.max(...todos.map((todo) => todo.id));
+  }
+
+  function addTodos(editingText) {
+    const todo = { id: maxId() + 1, content: editingText };
+    setTodos([...todos, todo]);
+  }
+
   function updateTodos(updatedTodo) {
     const updatedTodos = todos.map((todo) =>
       todo.id === updatedTodo.id ? updatedTodo : todo
@@ -32,6 +41,7 @@ export function TodoTable({ localStorageTodos }) {
         <EditBoard
           todos={todos}
           onSetEditingTodoId={setEditingTodoId}
+          onAddTodos={addTodos}
           onUpdateTodos={updateTodos}
           onDeleteTodo={deleteTodo}
           id={editingTodoId}

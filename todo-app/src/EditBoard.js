@@ -5,6 +5,7 @@ import "./EditBoard.css";
 export function EditBoard({
   todos,
   onSetEditingTodoId,
+  onAddTodos,
   onUpdateTodos,
   onDeleteTodo,
   id,
@@ -24,6 +25,11 @@ export function EditBoard({
     setEditingText(e.target.value);
   }
 
+  function addTodo(){
+    onAddTodos(editingText)
+    setEditingText("")
+  }
+
   return (
     <div className="row-list">
       <div className="item">
@@ -38,7 +44,7 @@ export function EditBoard({
           <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
           <div className="content">
             {editingId === null ? (
-              <button onClick={() => null}>新規作成</button>
+              <button onClick={() => addTodo()}>新規作成</button>
             ) : (
               <>
                 <button
