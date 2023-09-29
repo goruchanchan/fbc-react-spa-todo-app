@@ -5,13 +5,8 @@ import { TodoTable } from "./TodoTable";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const todos = [
-  { id: 0, content: "hoge"},
-  { id: 1, content: "foo"},
-  { id: 2, content: "bar"},
-  { id: 3, content: "hogehoge\nhogehoge"},
-  { id: 4, content: "foo\nbar"},
-];
+const jsonData = localStorage.getItem("todos");
+const todos = JSON.parse(jsonData);
 
 root.render(
   <React.StrictMode>

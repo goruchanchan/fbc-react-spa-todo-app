@@ -1,12 +1,17 @@
 import { ViewBoard } from "./ViewBoard";
 import { EditBoard } from "./EditBoard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./TodoTable.css";
 
 export function TodoTable({ localStorageTodos }) {
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
+
+  useEffect(() => {
+    const jsonData = JSON.stringify(todos, undefined, 1);
+    localStorage.setItem("todos", jsonData);
+  }, [todos]);
 
   function maxId() {
     return Math.max(...todos.map((todo) => todo.id));
