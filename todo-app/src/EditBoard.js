@@ -29,14 +29,13 @@ export function EditBoard({
   }
 
   function addTodo() {
-    if (noInput === undefined) {
+    if (editingText === "") {
       setNoInput(true);
       return;
     }
-    if (noInput) return;
 
     onAddTodos(editingText);
-    setNoInput(editingText === "" ? true : false);
+    setNoInput(false);
     setEditingText("");
   }
 
