@@ -13,12 +13,14 @@ export function TodoTable({ localStorageTodos }) {
     localStorage.setItem("todos", jsonData);
   }, [todos]);
 
-  function maxId() {
-    return Math.max(...todos.map((todo) => todo.id));
+  function calculateMaxId() {
+    const maxId =
+      todos.length === 0 ? 0 : Math.max(...todos.map((todo) => todo.id));
+    return maxId;
   }
 
   function addTodos(editingText) {
-    const todo = { id: maxId() + 1, content: editingText };
+    const todo = { id: calculateMaxId() + 1, content: editingText };
     setTodos([...todos, todo]);
   }
 

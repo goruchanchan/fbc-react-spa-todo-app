@@ -6,7 +6,7 @@ import { TodoTable } from "./TodoTable";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const jsonData = localStorage.getItem("todos");
-const todos = JSON.parse(jsonData);
+const todos = jsonData == null ? [] : JSON.parse(jsonData);
 
 root.render(
   <React.StrictMode>
