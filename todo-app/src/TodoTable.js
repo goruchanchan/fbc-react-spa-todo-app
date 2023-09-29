@@ -20,7 +20,7 @@ export function TodoTable({ localStorageTodos }) {
   }
 
   function addTodos(editingText) {
-    const todo = { id: calculateMaxId() + 1, content: editingText };
+    const todo = { id: calculateMaxId() + 1, text: editingText };
     setTodos([...todos, todo]);
   }
 

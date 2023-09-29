@@ -12,14 +12,14 @@ export function EditBoard({
 }) {
   const editingIndex = todos.findIndex((todo) => todo.id === id);
   const [editingText, setEditingText] = useState(
-    editingIndex !== -1 ? todos[editingIndex].content : ""
+    editingIndex !== -1 ? todos[editingIndex].text : ""
   );
   const [editingId, setEditingId] = useState(id);
   const [noInput, setNoInput] = useState(undefined);
 
   if (id !== editingId) {
     setEditingId(id);
-    setEditingText(id !== null ? todos[editingIndex].content : "");
+    setEditingText(id !== null ? todos[editingIndex].text : "");
     setNoInput(null);
   }
 
@@ -44,7 +44,7 @@ export function EditBoard({
 
     const todo = {
       id: editingId,
-      content: editingText,
+      text: editingText,
     };
     onUpdateTodos(todo);
   }
@@ -61,7 +61,7 @@ export function EditBoard({
       <div className="item">
         <div className="wrap">
           <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
-          <div className="content">
+          <div className="text">
             {editingId === null ? (
               <button onClick={() => addTodo()}>新規作成</button>
             ) : (
