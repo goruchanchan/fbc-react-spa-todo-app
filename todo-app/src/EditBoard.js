@@ -19,7 +19,7 @@ export function EditBoard({
 
   if (id !== editingId) {
     setEditingId(id);
-    setEditingText(id !== null ? todos[editingIndex].text : "");
+    setEditingText(id !== 0 ? todos[editingIndex].text : "");
     setNoInput(null);
   }
 
@@ -62,7 +62,7 @@ export function EditBoard({
         <div className="wrap">
           <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
           <div className="text">
-            {editingId === null ? (
+            {editingId === 0 ? (
               <button onClick={() => addTodo()}>新規作成</button>
             ) : (
               <>

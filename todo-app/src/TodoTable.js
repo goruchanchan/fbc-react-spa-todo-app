@@ -22,6 +22,7 @@ export function TodoTable({ localStorageTodos }) {
   function addTodos(editingText) {
     const todo = { id: calculateMaxId() + 1, text: editingText };
     setTodos([...todos, todo]);
+    setEditingTodoId(null);
   }
 
   function updateTodos(updatedTodo) {
@@ -37,22 +38,29 @@ export function TodoTable({ localStorageTodos }) {
     setEditingTodoId(null);
   }
 
+  let title = "編集";
+  if (editingTodoId === null) {
+    title = "一覧";
+  } else if (editingTodoId === 0) {
+    title = "新規作成";
+  }
+
   return (
     <div className="TodoTable">
-      <h2>一覧</h2>
+      <h2>{title}</h2>
       <div className="Board">
-        <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
-      </div>
-      <h2>{editingTodoId === null ? "新規作成" : "編集"}</h2>
-      <div className="Board">
-        <EditBoard
-          todos={todos}
-          onSetEditingTodoId={setEditingTodoId}
-          onAddTodos={addTodos}
-          onUpdateTodos={updateTodos}
-          onDeleteTodo={deleteTodo}
-          id={editingTodoId}
-        />
+        {editingTodoId === null ? (
+          <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
+        ) : (
+          <EditBoard
+            todos={todos}
+            onSetEditingTodoId={setEditingTodoId}
+            onAddTodos={addTodos}
+            onUpdateTodos={updateTodos}
+            onDeleteTodo={deleteTodo}
+            id={editingTodoId}
+          />
+        )}
       </div>
     </div>
   );
