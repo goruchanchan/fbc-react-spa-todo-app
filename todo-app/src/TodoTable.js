@@ -27,7 +27,7 @@ export function TodoTable({ localStorageTodos }) {
 
   function updateTodos(updatedTodo) {
     const updatedTodos = todos.map((todo) =>
-      todo.id === updatedTodo.id ? updatedTodo : todo
+      todo.id === updatedTodo.id ? updatedTodo : todo,
     );
     setTodos(updatedTodos);
   }

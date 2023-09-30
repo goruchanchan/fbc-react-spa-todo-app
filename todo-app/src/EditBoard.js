@@ -12,7 +12,7 @@ export function EditBoard({
 }) {
   const editingIndex = todos.findIndex((todo) => todo.id === id);
   const [editingText, setEditingText] = useState(
-    editingIndex !== -1 ? todos[editingIndex].text : ""
+    editingIndex !== -1 ? todos[editingIndex].text : "",
   );
   const [editingId, setEditingId] = useState(id);
   const [noInput, setNoInput] = useState(undefined);

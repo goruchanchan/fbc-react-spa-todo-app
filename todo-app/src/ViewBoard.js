@@ -20,10 +20,7 @@ export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
         </li>
       ))}
       <li>
-        <button
-          className={"UniqueLink"}
-          onClick={() => onSetEditingTodoId(0)}
-        >
+        <button className={"UniqueLink"} onClick={() => onSetEditingTodoId(0)}>
           +
         </button>
       </li>

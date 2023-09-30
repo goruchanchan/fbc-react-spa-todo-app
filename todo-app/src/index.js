@@ -11,5 +11,5 @@ const todos = jsonData == null ? [] : JSON.parse(jsonData);
 root.render(
   <React.StrictMode>
     <TodoTable localStorageTodos={todos} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
