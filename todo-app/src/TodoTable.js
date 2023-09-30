@@ -42,7 +42,7 @@ export function TodoTable({ localStorageTodos }) {
   if (editingTodoId === null) {
     title = "一覧";
   } else if (editingTodoId === 0) {
-    title = "新規作成";
+    title = "新規";
   }
 
   return (
