@@ -34,6 +34,13 @@ export function TodoTable({ localStorageTodos }) {
     setTodos(updatedTodos);
   }
 
+  function updateLogin() {
+    // 新規作成の編集中にログイン状態が切れた時には、一覧表示状態に戻す
+    if (login && editingTodoId === 0) setEditingTodoId(null);
+
+    setLogin(!login);
+  }
+
   function deleteTodo(deleteTodoId) {
     const updatedTodos = todos.filter((todo) => todo.id !== deleteTodoId);
     setTodos(updatedTodos);
@@ -48,7 +55,7 @@ export function TodoTable({ localStorageTodos }) {
       <h2>{title}</h2>
       <div className="Board">
         <div className="LoginButton">
-          <button onClick={() => setLogin(!login)}>{loginButtonText}</button>
+          <button onClick={() => updateLogin()}>{loginButtonText}</button>
         </div>
         <LoginContext.Provider value={login}>
           {editingTodoId === null ? (
