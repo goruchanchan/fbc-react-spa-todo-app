@@ -62,8 +62,9 @@ export function EditBoard({
       <div className="item">
         <div className="wrap">
           <textarea
+            readOnly={login ? false : true}
             value={editingText}
-            onChange={login ? (e) => updateTextarea(e) : null}
+            onChange={(e) => updateTextarea(e)}
           />
           {login ? (
             <>
