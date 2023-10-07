@@ -1,6 +1,11 @@
 import "./ViewBoard.css";
 
-export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
+export function ViewBoard({
+  todos,
+  onSetEditingTodoId,
+  editingId = null,
+  login,
+}) {
   function extractFirstLine(todo) {
     return todo.split(/\n/)[0];
   }
@@ -19,11 +24,16 @@ export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
           </button>
         </li>
       ))}
-      <li>
-        <button className={"UniqueLink"} onClick={() => onSetEditingTodoId(0)}>
-          +
-        </button>
-      </li>
+      {login ? (
+        <li>
+          <button
+            className={"UniqueLink"}
+            onClick={() => onSetEditingTodoId(0)}
+          >
+            +
+          </button>
+        </li>
+      ) : null}
     </>
   );
 }

@@ -8,6 +8,7 @@ export function EditBoard({
   onAddTodos,
   onUpdateTodos,
   onDeleteTodo,
+  login,
   id,
 }) {
   const editingIndex = todos.findIndex((todo) => todo.id === id);
@@ -61,17 +62,23 @@ export function EditBoard({
       <div className="item">
         <div className="wrap">
           <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
-          <div className="text">
-            {editingId === 0 ? (
-              <button onClick={() => addTodo()}>新規作成</button>
-            ) : (
-              <>
-                <button onClick={() => updateTodos()}>編集</button>
-                <button onClick={() => onDeleteTodo(editingId)}>削除</button>
-              </>
-            )}
-          </div>
-          {noInput ? <div className="error">空入力は禁止です</div> : ""}
+          {login ? (
+            <>
+              <div className="text">
+                {editingId === 0 ? (
+                  <button onClick={() => addTodo()}>新規作成</button>
+                ) : (
+                  <>
+                    <button onClick={() => updateTodos()}>編集</button>
+                    <button onClick={() => onDeleteTodo(editingId)}>
+                      削除
+                    </button>
+                  </>
+                )}
+              </div>
+              {noInput ? <div className="error">空入力は禁止です</div> : ""}
+            </>
+          ) : null}
         </div>
       </div>
     </div>

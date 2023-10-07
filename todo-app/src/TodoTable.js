@@ -7,6 +7,7 @@ import "./TodoTable.css";
 export function TodoTable({ localStorageTodos }) {
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
+  const [login, setLogin] = useState(false);
 
   useEffect(() => {
     const jsonData = JSON.stringify(todos, undefined, 1);
@@ -38,19 +39,23 @@ export function TodoTable({ localStorageTodos }) {
     setEditingTodoId(null);
   }
 
-  let title = "編集";
-  if (editingTodoId === null) {
-    title = "一覧";
-  } else if (editingTodoId === 0) {
-    title = "新規";
-  }
+  const title = login ? "ログイン済" : "未ログイン";
+  const loginButtonText = login ? "ログアウト" : "ログイン";
 
   return (
     <div className="TodoTable">
       <h2>{title}</h2>
       <div className="Board">
+        <div className="LoginButton">
+          <button onClick={() => setLogin(!login)}>{loginButtonText}</button>
+        </div>
+
         {editingTodoId === null ? (
-          <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
+          <ViewBoard
+            todos={todos}
+            onSetEditingTodoId={setEditingTodoId}
+            login={login}
+          />
         ) : (
           <EditBoard
             todos={todos}
@@ -58,6 +63,7 @@ export function TodoTable({ localStorageTodos }) {
             onAddTodos={addTodos}
             onUpdateTodos={updateTodos}
             onDeleteTodo={deleteTodo}
+            login={login}
             id={editingTodoId}
           />
         )}
