@@ -57,6 +57,7 @@ export function EditBoard({
           todos={todos}
           onSetEditingTodoId={onSetEditingTodoId}
           editingId={id}
+          login={login}
         />
       </div>
       <div className="item">
