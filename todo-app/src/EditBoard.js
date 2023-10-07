@@ -1,5 +1,6 @@
 import { ViewBoard } from "./ViewBoard";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { LoginContext } from "./LoginContext";
 import "./EditBoard.css";
 
 export function EditBoard({
@@ -8,7 +9,6 @@ export function EditBoard({
   onAddTodos,
   onUpdateTodos,
   onDeleteTodo,
-  login,
   id,
 }) {
   const editingIndex = todos.findIndex((todo) => todo.id === id);
@@ -17,6 +17,7 @@ export function EditBoard({
   );
   const [editingId, setEditingId] = useState(id);
   const [noInput, setNoInput] = useState(undefined);
+  const login = useContext(LoginContext);
 
   if (id !== editingId) {
     setEditingId(id);
@@ -75,7 +76,6 @@ export function EditBoard({
           todos={todos}
           onSetEditingTodoId={onSetEditingTodoId}
           editingId={id}
-          login={login}
         />
       </div>
       <div className="item">

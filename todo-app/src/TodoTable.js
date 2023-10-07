@@ -1,6 +1,7 @@
 import { ViewBoard } from "./ViewBoard";
 import { EditBoard } from "./EditBoard";
 import { useState, useEffect } from "react";
+import { LoginContext } from "./LoginContext";
 
 import "./TodoTable.css";
 
@@ -49,24 +50,20 @@ export function TodoTable({ localStorageTodos }) {
         <div className="LoginButton">
           <button onClick={() => setLogin(!login)}>{loginButtonText}</button>
         </div>
-
-        {editingTodoId === null ? (
-          <ViewBoard
-            todos={todos}
-            onSetEditingTodoId={setEditingTodoId}
-            login={login}
-          />
-        ) : (
-          <EditBoard
-            todos={todos}
-            onSetEditingTodoId={setEditingTodoId}
-            onAddTodos={addTodos}
-            onUpdateTodos={updateTodos}
-            onDeleteTodo={deleteTodo}
-            login={login}
-            id={editingTodoId}
-          />
-        )}
+        <LoginContext.Provider value={login}>
+          {editingTodoId === null ? (
+            <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
+          ) : (
+            <EditBoard
+              todos={todos}
+              onSetEditingTodoId={setEditingTodoId}
+              onAddTodos={addTodos}
+              onUpdateTodos={updateTodos}
+              onDeleteTodo={deleteTodo}
+              id={editingTodoId}
+            />
+          )}
+        </LoginContext.Provider>
       </div>
     </div>
   );
