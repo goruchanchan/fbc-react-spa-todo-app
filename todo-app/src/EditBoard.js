@@ -50,6 +50,24 @@ export function EditBoard({
     onUpdateTodos(todo);
   }
 
+  function editView() {
+    return (
+      <>
+        <div className="text">
+          {editingId === 0 ? (
+            <button onClick={() => addTodo()}>新規作成</button>
+          ) : (
+            <>
+              <button onClick={() => updateTodos()}>編集</button>
+              <button onClick={() => onDeleteTodo(editingId)}>削除</button>
+            </>
+          )}
+        </div>
+        {noInput ? <div className="error">空入力は禁止です</div> : ""}
+      </>
+    );
+  }
+
   return (
     <div className="row-list">
       <div className="item">
@@ -67,23 +85,7 @@ export function EditBoard({
             value={editingText}
             onChange={(e) => updateTextarea(e)}
           />
-          {login ? (
-            <>
-              <div className="text">
-                {editingId === 0 ? (
-                  <button onClick={() => addTodo()}>新規作成</button>
-                ) : (
-                  <>
-                    <button onClick={() => updateTodos()}>編集</button>
-                    <button onClick={() => onDeleteTodo(editingId)}>
-                      削除
-                    </button>
-                  </>
-                )}
-              </div>
-              {noInput ? <div className="error">空入力は禁止です</div> : ""}
-            </>
-          ) : null}
+          {login ? editView() : null}
         </div>
       </div>
     </div>
