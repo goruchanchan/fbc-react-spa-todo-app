@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import "./TodoTable.css";
 
 export function TodoTable({ localStorageTodos }) {
-  const [editingTodoId, setEditingTodoId] = useState(0);
+  const [selectedTodoId, setSelectedTodoId] = useState(0);
   const [todos, setTodos] = useState(localStorageTodos);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -20,10 +20,9 @@ export function TodoTable({ localStorageTodos }) {
     return maxId;
   }
 
-  function addTodos(editingText) {
-    const todo = { id: calculateMaxId() + 1, text: editingText };
-    setTodos([...todos, todo]);
-    setEditingTodoId(0);
+  function addTodos(todo) {
+    const newTodo = { ...todo, id: calculateMaxId() + 1 };
+    setTodos([...todos, newTodo]);
   }
 
   function updateTodos(updatedTodo) {
@@ -33,15 +32,15 @@ export function TodoTable({ localStorageTodos }) {
     setTodos(updatedTodos);
   }
 
-  function editTodo(id) {
+  function selectTodo(id) {
     id === 0 ? setIsEdit(false) : setIsEdit(true);
-    setEditingTodoId(id);
+    setSelectedTodoId(id);
   }
 
-  function deleteTodo(deleteTodoId) {
-    const updatedTodos = todos.filter((todo) => todo.id !== deleteTodoId);
+  function deleteTodo(deleteTodo) {
+    const updatedTodos = todos.filter((todo) => todo.id !== deleteTodo.id);
     setTodos(updatedTodos);
-    setEditingTodoId(0);
+    setSelectedTodoId(0);
   }
 
   return (
@@ -52,8 +51,8 @@ export function TodoTable({ localStorageTodos }) {
           <div className="item">
             <ViewBoard
               todos={todos}
-              onSetEditingTodoId={editTodo}
-              editingId={editingTodoId}
+              onSetSelectedTodoId={selectTodo}
+              editingId={selectedTodoId}
             />
           </div>
           <div className="item">
@@ -62,7 +61,7 @@ export function TodoTable({ localStorageTodos }) {
               onAddTodos={addTodos}
               onUpdateTodos={updateTodos}
               onDeleteTodo={deleteTodo}
-              id={editingTodoId}
+              id={selectedTodoId}
             />
           </div>
         </div>
