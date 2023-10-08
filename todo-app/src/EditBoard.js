@@ -1,6 +1,6 @@
 import { ViewBoard } from "./ViewBoard";
-import { useState, useContext } from "react";
-import { LoginContext } from "./LoginContext";
+import { useState } from "react";
+import { useLogin } from "./LoginContext";
 import "./EditBoard.css";
 
 export function EditBoard({
@@ -17,7 +17,7 @@ export function EditBoard({
   );
   const [editingId, setEditingId] = useState(id);
   const [noInput, setNoInput] = useState(undefined);
-  const login = useContext(LoginContext);
+  const { login } = useLogin();
 
   if (id !== editingId) {
     setEditingId(id);

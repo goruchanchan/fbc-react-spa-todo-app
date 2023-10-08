@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { LoginContext } from "./LoginContext";
+import { useLogin } from "./LoginContext";
 import "./ViewBoard.css";
 
 export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
-  const login = useContext(LoginContext);
+  const { login } = useLogin();
 
   function extractFirstLine(todo) {
     return todo.split(/\n/)[0];

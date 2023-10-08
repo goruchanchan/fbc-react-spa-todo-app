@@ -1,14 +1,14 @@
 import { ViewBoard } from "./ViewBoard";
 import { EditBoard } from "./EditBoard";
 import { useState, useEffect } from "react";
-import { LoginContext } from "./LoginContext";
+import { useLogin } from "./LoginContext";
 
 import "./TodoTable.css";
 
 export function TodoTable({ localStorageTodos }) {
   const [editingTodoId, setEditingTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
-  const [login, setLogin] = useState(false);
+  const { login, onSetLogin } = useLogin();
 
   useEffect(() => {
     const jsonData = JSON.stringify(todos, undefined, 1);
@@ -38,7 +38,7 @@ export function TodoTable({ localStorageTodos }) {
     // 新規作成の編集中にログイン状態が切れた時には、一覧表示状態に戻す
     if (login && editingTodoId === 0) setEditingTodoId(null);
 
-    setLogin(!login);
+    onSetLogin();
   }
 
   function deleteTodo(deleteTodoId) {
@@ -57,20 +57,19 @@ export function TodoTable({ localStorageTodos }) {
         <div className="LoginButton">
           <button onClick={() => updateLogin()}>{loginButtonText}</button>
         </div>
-        <LoginContext.Provider value={login}>
-          {editingTodoId === null ? (
-            <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
-          ) : (
-            <EditBoard
-              todos={todos}
-              onSetEditingTodoId={setEditingTodoId}
-              onAddTodos={addTodos}
-              onUpdateTodos={updateTodos}
-              onDeleteTodo={deleteTodo}
-              id={editingTodoId}
-            />
-          )}
-        </LoginContext.Provider>
+
+        {editingTodoId === null ? (
+          <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
+        ) : (
+          <EditBoard
+            todos={todos}
+            onSetEditingTodoId={setEditingTodoId}
+            onAddTodos={addTodos}
+            onUpdateTodos={updateTodos}
+            onDeleteTodo={deleteTodo}
+            id={editingTodoId}
+          />
+        )}
       </div>
     </div>
   );
