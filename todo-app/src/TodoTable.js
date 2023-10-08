@@ -32,7 +32,7 @@ export function TodoTable({ localStorageTodos }) {
     setTodos(updatedTodos);
   }
 
-  function selectTodo(id) {
+  function selectTodoId(id) {
     id === 0 ? setIsEdit(false) : setIsEdit(true);
     setSelectedTodoId(id);
   }
@@ -51,8 +51,8 @@ export function TodoTable({ localStorageTodos }) {
           <div className="item">
             <ViewBoard
               todos={todos}
-              onSetSelectedTodoId={selectTodo}
-              editingId={selectedTodoId}
+              onSetSelectTodoId={selectTodoId}
+              selectedTodoId={selectedTodoId}
             />
           </div>
           <div className="item">

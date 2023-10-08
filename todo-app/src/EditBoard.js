@@ -12,7 +12,7 @@ export function EditBoard({
   const [editingTodo, setEditingTodo] = useState(
     targetTodo ? targetTodo : { id: 0, text: "" },
   );
-  const [noInput, setNoInput] = useState(undefined);
+  const [noInput, setNoInput] = useState(false);
 
   if (id !== editingTodo.id) {
     setEditingTodo(id !== 0 ? targetTodo : { id: 0, text: "" });
@@ -31,7 +31,6 @@ export function EditBoard({
     }
 
     onAddTodos(editingTodo);
-    setNoInput(false);
     setEditingTodo({ id: 0, text: "" });
   }
 
@@ -41,14 +40,14 @@ export function EditBoard({
   }
 
   function deleteTodo() {
-    onDeleteTodo(id);
+    onDeleteTodo(editingTodo);
   }
 
   return (
     <div className="wrap">
       <textarea value={editingTodo.text} onChange={(e) => updateTextarea(e)} />
       <div className="text">
-        {id === 0 ? (
+        {editingTodo.id === 0 ? (
           <button onClick={() => addTodo()}>新規作成</button>
         ) : (
           <>

@@ -1,6 +1,6 @@
 import "./ViewBoard.css";
 
-export function ViewBoard({ todos, onSetSelectedTodoId, editingId = null }) {
+export function ViewBoard({ todos, onSetSelectTodoId, selectedTodoId = null }) {
   function extractFirstLine(todo) {
     return todo.split(/\n/)[0];
   }
@@ -10,17 +10,17 @@ export function ViewBoard({ todos, onSetSelectedTodoId, editingId = null }) {
       {todos.map((todo) => (
         <li key={todo.id}>
           <button
-            className={editingId === todo.id ? "no-link" : "unique-link"}
-            onClick={() => onSetSelectedTodoId(todo.id)}
+            className={selectedTodoId === todo.id ? "no-link" : "unique-link"}
+            onClick={() => onSetSelectTodoId(todo.id)}
           >
-            <span className={editingId === todo.id ? "" : "edit-todo"}>
+            <span className={selectedTodoId === todo.id ? "" : "edit-todo"}>
               {extractFirstLine(todo.text)}
             </span>
           </button>
         </li>
       ))}
       <li>
-        <button className={"unique-link"} onClick={() => onSetSelectedTodoId(0)}>
+        <button className={"unique-link"} onClick={() => onSetSelectTodoId(0)}>
           +
         </button>
       </li>
