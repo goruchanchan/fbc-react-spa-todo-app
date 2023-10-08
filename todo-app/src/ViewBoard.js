@@ -6,7 +6,7 @@ export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
   }
 
   return (
-    <>
+    <ul>
       {todos.map((todo) => (
         <li key={todo.id}>
           <button
@@ -24,6 +24,6 @@ export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
           +
         </button>
       </li>
-    </>
+    </ul>
   );
 }
