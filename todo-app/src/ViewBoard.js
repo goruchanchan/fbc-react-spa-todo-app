@@ -10,7 +10,7 @@ export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
       {todos.map((todo) => (
         <li key={todo.id}>
           <button
-            className={editingId === todo.id ? "NoLink" : "UniqueLink"}
+            className={editingId === todo.id ? "no-link" : "unique-link"}
             onClick={() => onSetEditingTodoId(todo.id)}
           >
             <div className={editingId === todo.id ? "" : "edit-todo"}>
@@ -20,7 +20,7 @@ export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
         </li>
       ))}
       <li>
-        <button className={"UniqueLink"} onClick={() => onSetEditingTodoId(0)}>
+        <button className={"unique-link"} onClick={() => onSetEditingTodoId(0)}>
           +
         </button>
       </li>

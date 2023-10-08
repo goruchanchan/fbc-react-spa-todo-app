@@ -46,9 +46,9 @@ export function TodoTable({ localStorageTodos }) {
   }
 
   return (
-    <div className="TodoTable">
+    <div className="todo-table">
       <h2>{title}</h2>
-      <div className="Board">
+      <div className="board">
         {editingTodoId === null ? (
           <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
         ) : (
