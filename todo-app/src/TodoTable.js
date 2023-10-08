@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import "./TodoTable.css";
 
 export function TodoTable({ localStorageTodos }) {
-  const [editingTodoId, setEditingTodoId] = useState(null);
+  const [editingTodoId, setEditingTodoId] = useState(0);
   const [todos, setTodos] = useState(localStorageTodos);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export function TodoTable({ localStorageTodos }) {
   function addTodos(editingText) {
     const todo = { id: calculateMaxId() + 1, text: editingText };
     setTodos([...todos, todo]);
-    setEditingTodoId(null);
+    setEditingTodoId(0);
   }
 
   function updateTodos(updatedTodo) {
@@ -35,7 +35,7 @@ export function TodoTable({ localStorageTodos }) {
   function deleteTodo(deleteTodoId) {
     const updatedTodos = todos.filter((todo) => todo.id !== deleteTodoId);
     setTodos(updatedTodos);
-    setEditingTodoId(null);
+    setEditingTodoId(0);
   }
 
   let title = "編集";
@@ -49,18 +49,24 @@ export function TodoTable({ localStorageTodos }) {
     <div className="todo-table">
       <h2>{title}</h2>
       <div className="board">
-        {editingTodoId === null ? (
-          <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
-        ) : (
-          <EditBoard
-            todos={todos}
-            onSetEditingTodoId={setEditingTodoId}
-            onAddTodos={addTodos}
-            onUpdateTodos={updateTodos}
-            onDeleteTodo={deleteTodo}
-            id={editingTodoId}
-          />
-        )}
+        <div className="row-list">
+          <div className="item">
+            <ViewBoard
+              todos={todos}
+              onSetEditingTodoId={setEditingTodoId}
+              editingId={editingTodoId}
+            />
+          </div>
+          <div className="item">
+            <EditBoard
+              todos={todos}
+              onAddTodos={addTodos}
+              onUpdateTodos={updateTodos}
+              onDeleteTodo={deleteTodo}
+              id={editingTodoId}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

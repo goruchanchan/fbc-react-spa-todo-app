@@ -1,10 +1,8 @@
-import { ViewBoard } from "./ViewBoard";
 import { useState } from "react";
 import "./EditBoard.css";
 
 export function EditBoard({
   todos,
-  onSetEditingTodoId,
   onAddTodos,
   onUpdateTodos,
   onDeleteTodo,
@@ -50,30 +48,19 @@ export function EditBoard({
   }
 
   return (
-    <div className="row-list">
-      <div className="item">
-        <ViewBoard
-          todos={todos}
-          onSetEditingTodoId={onSetEditingTodoId}
-          editingId={id}
-        />
+    <div className="wrap">
+      <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
+      <div className="text">
+        {editingId === 0 ? (
+          <button onClick={() => addTodo()}>新規作成</button>
+        ) : (
+          <>
+            <button onClick={() => updateTodos()}>編集</button>
+            <button onClick={() => onDeleteTodo(editingId)}>削除</button>
+          </>
+        )}
       </div>
-      <div className="item">
-        <div className="wrap">
-          <textarea value={editingText} onChange={(e) => updateTextarea(e)} />
-          <div className="text">
-            {editingId === 0 ? (
-              <button onClick={() => addTodo()}>新規作成</button>
-            ) : (
-              <>
-                <button onClick={() => updateTodos()}>編集</button>
-                <button onClick={() => onDeleteTodo(editingId)}>削除</button>
-              </>
-            )}
-          </div>
-          {noInput ? <div className="error">空入力は禁止です</div> : ""}
-        </div>
-      </div>
+      {noInput ? <div className="error">空入力は禁止です</div> : ""}
     </div>
   );
 }
