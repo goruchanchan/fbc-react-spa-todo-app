@@ -13,9 +13,9 @@ export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
             className={editingId === todo.id ? "no-link" : "unique-link"}
             onClick={() => onSetEditingTodoId(todo.id)}
           >
-            <div className={editingId === todo.id ? "" : "edit-todo"}>
+            <span className={editingId === todo.id ? "" : "edit-todo"}>
               {extractFirstLine(todo.text)}
-            </div>
+            </span>
           </button>
         </li>
       ))}
