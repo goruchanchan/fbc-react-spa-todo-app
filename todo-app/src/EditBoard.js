@@ -8,16 +8,17 @@ export function EditBoard({
   onDeleteTodo,
   id,
 }) {
-  const editingIndex = todos.findIndex((todo) => todo.id === id);
+  const editingTodo = todos.find((todo) => todo.id === id);
   const [editingText, setEditingText] = useState(
-    editingIndex !== -1 ? todos[editingIndex].text : "",
+    editingTodo ? editingTodo.text : "",
   );
+
   const [editingId, setEditingId] = useState(id);
   const [noInput, setNoInput] = useState(undefined);
 
   if (id !== editingId) {
     setEditingId(id);
-    setEditingText(id !== 0 ? todos[editingIndex].text : "");
+    setEditingText(id !== 0 ? editingTodo.text : "");
     setNoInput(null);
   }
 
