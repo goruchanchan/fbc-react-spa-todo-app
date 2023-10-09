@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 
 import "./TodoTable.css";
 
-export function TodoTable({ localStorageTodos }) {
+export function TodoTable() {
+  const jsonData = localStorage.getItem("todos");
+  const localStorageTodos = jsonData == null ? [] : JSON.parse(jsonData);
   const [selectedTodoId, setSelectedTodoId] = useState(0);
   const [todos, setTodos] = useState(localStorageTodos);
   const [isEdit, setIsEdit] = useState(false);
