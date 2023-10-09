@@ -7,7 +7,7 @@ export const LoginProvider = ({ children }) => {
   const onSetLogin = () => setLogin(!login);
 
   return (
-    <LoginContext.Provider value={{login, onSetLogin}}>
+    <LoginContext.Provider value={{ login, onSetLogin }}>
       {children}
     </LoginContext.Provider>
   );
