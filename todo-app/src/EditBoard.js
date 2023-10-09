@@ -31,7 +31,7 @@ export function EditBoard({
     }
 
     onAddTodos(editingTodo);
-    setEditingTodo({ id: 0, text: "" });
+    setEditingTodo({ id: null, text: "" });
   }
 
   function updateTodos() {
@@ -47,7 +47,7 @@ export function EditBoard({
     return (
       <>
         <div className="editing">
-          {editingTodo.id === 0 ? (
+          {selectedTodoId === 0 ? (
             <button onClick={() => addTodo()}>新規作成</button>
           ) : (
             <>
@@ -63,12 +63,16 @@ export function EditBoard({
 
   return (
     <div className="wrap">
-      <textarea
-        readOnly={login ? false : true}
-        value={editingTodo.text}
-        onChange={(e) => updateTextarea(e)}
-      />
-      {login ? viewEditButton() : null}
+      {selectedTodoId !== null && (
+        <>
+          <textarea
+            readOnly={login ? false : true}
+            value={editingTodo.text}
+            onChange={(e) => updateTextarea(e)}
+          />
+          {login && viewEditButton()}
+        </>
+      )}
     </div>
   );
 }
