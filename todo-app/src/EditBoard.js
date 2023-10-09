@@ -43,14 +43,14 @@ export function EditBoard({
 
   return (
     <div className="wrap">
-      {selectedTodoId !== null ? (
+      {selectedTodoId !== null && (
         <>
           <textarea
             value={editingTodo.text}
             onChange={(e) => updateTextarea(e)}
           />
           <div className="text">
-            {editingTodo.id === 0 ? (
+            {selectedTodoId === 0 ? (
               <button onClick={() => addTodo()}>新規作成</button>
             ) : (
               <>
@@ -59,9 +59,9 @@ export function EditBoard({
               </>
             )}
           </div>
-          {noInput ? <div className="error">空入力は禁止です</div> : ""}
+          {noInput && <div className="error">空入力は禁止です</div>}
         </>
-      ) : null}
+      )}
     </div>
   );
 }
