@@ -43,7 +43,7 @@ export function EditBoard({
     onDeleteTodo(editingTodo);
   }
 
-  function editView() {
+  function viewEditButton() {
     return (
       <>
         <div className="editing">
@@ -68,7 +68,7 @@ export function EditBoard({
         value={editingTodo.text}
         onChange={(e) => updateTextarea(e)}
       />
-      {login ? editView() : null}
+      {login ? viewEditButton() : null}
     </div>
   );
 }
