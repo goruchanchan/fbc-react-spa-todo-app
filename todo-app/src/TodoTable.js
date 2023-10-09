@@ -7,7 +7,7 @@ import "./TodoTable.css";
 export function TodoTable() {
   const jsonData = localStorage.getItem("todos");
   const localStorageTodos = jsonData == null ? [] : JSON.parse(jsonData);
-  const [selectedTodoId, setSelectedTodoId] = useState(0);
+  const [selectedTodoId, setSelectedTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -25,6 +25,8 @@ export function TodoTable() {
   function addTodos(todo) {
     const newTodo = { ...todo, id: calculateMaxId() + 1 };
     setTodos([...todos, newTodo]);
+    setSelectedTodoId(null);
+    setIsEdit(false);
   }
 
   function updateTodos(updatedTodo) {
@@ -35,14 +37,15 @@ export function TodoTable() {
   }
 
   function selectTodoId(id) {
-    id === 0 ? setIsEdit(false) : setIsEdit(true);
+    id === null ? setIsEdit(false) : setIsEdit(true);
     setSelectedTodoId(id);
   }
 
   function deleteTodo(deleteTodo) {
     const updatedTodos = todos.filter((todo) => todo.id !== deleteTodo.id);
     setTodos(updatedTodos);
-    setSelectedTodoId(0);
+    setSelectedTodoId(null);
+    setIsEdit(false);
   }
 
   return (

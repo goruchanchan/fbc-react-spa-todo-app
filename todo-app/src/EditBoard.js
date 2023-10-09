@@ -29,7 +29,7 @@ export function EditBoard({
     }
 
     onAddTodos(editingTodo);
-    setEditingTodo({ id: 0, text: "" });
+    setEditingTodo({ id: null, text: "" });
   }
 
   function updateTodos() {
@@ -43,18 +43,25 @@ export function EditBoard({
 
   return (
     <div className="wrap">
-      <textarea value={editingTodo.text} onChange={(e) => updateTextarea(e)} />
-      <div className="text">
-        {editingTodo.id === 0 ? (
-          <button onClick={() => addTodo()}>新規作成</button>
-        ) : (
-          <>
-            <button onClick={() => updateTodos()}>編集</button>
-            <button onClick={() => deleteTodo()}>削除</button>
-          </>
-        )}
-      </div>
-      {noInput ? <div className="error">空入力は禁止です</div> : ""}
+      {selectedTodoId !== null ? (
+        <>
+          <textarea
+            value={editingTodo.text}
+            onChange={(e) => updateTextarea(e)}
+          />
+          <div className="text">
+            {editingTodo.id === 0 ? (
+              <button onClick={() => addTodo()}>新規作成</button>
+            ) : (
+              <>
+                <button onClick={() => updateTodos()}>編集</button>
+                <button onClick={() => deleteTodo()}>削除</button>
+              </>
+            )}
+          </div>
+          {noInput ? <div className="error">空入力は禁止です</div> : ""}
+        </>
+      ) : null}
     </div>
   );
 }
