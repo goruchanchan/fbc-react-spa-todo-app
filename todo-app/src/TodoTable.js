@@ -53,7 +53,7 @@ export function TodoTable() {
           <div className="item">
             <ViewBoard
               todos={todos}
-              onSetSelectTodoId={selectTodoId}
+              onSelectTodoId={selectTodoId}
               selectedTodoId={selectedTodoId}
             />
           </div>
