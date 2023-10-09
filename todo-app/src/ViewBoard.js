@@ -21,16 +21,13 @@ export function ViewBoard({ todos, onSelectTodoId, selectedTodoId = null }) {
           </button>
         </li>
       ))}
-      {login ? (
+      {login && (
         <li>
-          <button
-            className={"unique-link"}
-            onClick={() => onSelectTodoId(0)}
-          >
+          <button className={"unique-link"} onClick={() => onSelectTodoId(0)}>
             +
           </button>
         </li>
-      ) : null}
+      )}
     </ul>
   );
 }

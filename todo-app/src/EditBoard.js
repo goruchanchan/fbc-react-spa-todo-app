@@ -56,7 +56,7 @@ export function EditBoard({
             </>
           )}
         </div>
-        {noInput ? <div className="error">空入力は禁止です</div> : ""}
+        {noInput && <div className="error">空入力は禁止です</div>}
       </>
     );
   }
