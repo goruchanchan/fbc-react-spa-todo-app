@@ -1,37 +1,36 @@
 import { useLogin } from "./LoginContext";
 import "./ViewBoard.css";
 
-export function ViewBoard({ todos, onSetEditingTodoId, editingId = null }) {
+export function ViewBoard({ todos, onSelectTodoId, selectedTodoId = null }) {
   const { login } = useLogin();
-
   function extractFirstLine(todo) {
     return todo.split(/\n/)[0];
   }
 
   return (
-    <>
+    <ul>
       {todos.map((todo) => (
         <li key={todo.id}>
           <button
-            className={editingId === todo.id ? "NoLink" : "UniqueLink"}
-            onClick={() => onSetEditingTodoId(todo.id)}
+            className={selectedTodoId === todo.id ? "no-link" : "unique-link"}
+            onClick={() => onSelectTodoId(todo.id)}
           >
-            <div className={editingId === todo.id ? "" : "edit-todo"}>
+            <span className={selectedTodoId === todo.id ? "" : "edit-todo"}>
               {extractFirstLine(todo.text)}
-            </div>
+            </span>
           </button>
         </li>
       ))}
       {login ? (
         <li>
           <button
-            className={"UniqueLink"}
-            onClick={() => onSetEditingTodoId(0)}
+            className={"unique-link"}
+            onClick={() => onSelectTodoId(0)}
           >
             +
           </button>
         </li>
       ) : null}
-    </>
+    </ul>
   );
 }

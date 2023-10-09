@@ -6,13 +6,10 @@ import { LoginProvider } from "./LoginContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const jsonData = localStorage.getItem("todos");
-const todos = jsonData == null ? [] : JSON.parse(jsonData);
-
 root.render(
   <React.StrictMode>
     <LoginProvider>
-      <TodoTable localStorageTodos={todos} />
+      <TodoTable />
     </LoginProvider>
   </React.StrictMode>,
 );

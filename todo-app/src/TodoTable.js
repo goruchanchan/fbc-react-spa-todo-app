@@ -5,8 +5,10 @@ import { useLogin } from "./LoginContext";
 
 import "./TodoTable.css";
 
-export function TodoTable({ localStorageTodos }) {
-  const [editingTodoId, setEditingTodoId] = useState(null);
+export function TodoTable() {
+  const jsonData = localStorage.getItem("todos");
+  const localStorageTodos = jsonData == null ? [] : JSON.parse(jsonData);
+  const [selectedTodoId, setSelectedTodoId] = useState(0);
   const [todos, setTodos] = useState(localStorageTodos);
   const { login, onSetLogin } = useLogin();
 
@@ -21,10 +23,9 @@ export function TodoTable({ localStorageTodos }) {
     return maxId;
   }
 
-  function addTodos(editingText) {
-    const todo = { id: calculateMaxId() + 1, text: editingText };
-    setTodos([...todos, todo]);
-    setEditingTodoId(null);
+  function addTodos(todo) {
+    const newTodo = { ...todo, id: calculateMaxId() + 1 };
+    setTodos([...todos, newTodo]);
   }
 
   function updateTodos(updatedTodo) {
@@ -36,40 +37,50 @@ export function TodoTable({ localStorageTodos }) {
 
   function updateLogin() {
     // 新規作成の編集中にログイン状態が切れた時には、一覧表示状態に戻す
-    if (login && editingTodoId === 0) setEditingTodoId(null);
+    if (login && selectedTodoId === 0) setSelectedTodoId(null);
 
     onSetLogin();
-  }
-
-  function deleteTodo(deleteTodoId) {
-    const updatedTodos = todos.filter((todo) => todo.id !== deleteTodoId);
-    setTodos(updatedTodos);
-    setEditingTodoId(null);
   }
 
   const title = login ? "ログイン済" : "未ログイン";
   const loginButtonText = login ? "ログアウト" : "ログイン";
 
+  function selectTodoId(id) {
+    setSelectedTodoId(id);
+  }
+
+  function deleteTodo(deleteTodo) {
+    const updatedTodos = todos.filter((todo) => todo.id !== deleteTodo.id);
+    setTodos(updatedTodos);
+    setSelectedTodoId(0);
+  }
+
   return (
-    <div className="TodoTable">
+    <div className="todo-table">
       <h2>{title}</h2>
-      <div className="Board">
-        <div className="LoginButton">
+      <div className="board">
+        <div className="login-button">
           <button onClick={() => updateLogin()}>{loginButtonText}</button>
         </div>
 
-        {editingTodoId === null ? (
-          <ViewBoard todos={todos} onSetEditingTodoId={setEditingTodoId} />
-        ) : (
-          <EditBoard
-            todos={todos}
-            onSetEditingTodoId={setEditingTodoId}
-            onAddTodos={addTodos}
-            onUpdateTodos={updateTodos}
-            onDeleteTodo={deleteTodo}
-            id={editingTodoId}
-          />
-        )}
+        <div className="row-list">
+          <div className="item">
+            <ViewBoard
+              todos={todos}
+              onSelectTodoId={selectTodoId}
+              selectedTodoId={selectedTodoId}
+            />
+          </div>
+          <div className="item">
+            <EditBoard
+              todos={todos}
+              onAddTodos={addTodos}
+              onUpdateTodos={updateTodos}
+              onDeleteTodo={deleteTodo}
+              selectedTodoId={selectedTodoId}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,66 +1,58 @@
-import { ViewBoard } from "./ViewBoard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLogin } from "./LoginContext";
 import "./EditBoard.css";
 
 export function EditBoard({
   todos,
-  onSetEditingTodoId,
   onAddTodos,
   onUpdateTodos,
   onDeleteTodo,
-  id,
+  selectedTodoId,
 }) {
-  const editingIndex = todos.findIndex((todo) => todo.id === id);
-  const [editingText, setEditingText] = useState(
-    editingIndex !== -1 ? todos[editingIndex].text : "",
-  );
-  const [editingId, setEditingId] = useState(id);
-  const [noInput, setNoInput] = useState(undefined);
+  const targetTodo = todos.find((todo) => todo.id === selectedTodoId);
+  const [editingTodo, setEditingTodo] = useState({ id: 0, text: "" });
+  const [noInput, setNoInput] = useState(false);
   const { login } = useLogin();
 
-  if (id !== editingId) {
-    setEditingId(id);
-    setEditingText(id !== 0 ? todos[editingIndex].text : "");
-    setNoInput(null);
-  }
+  useEffect(() => {
+    setEditingTodo(targetTodo ? targetTodo : { id: 0, text: "" });
+    setNoInput(false);
+  }, [targetTodo]);
 
   function updateTextarea(e) {
-    setEditingText(e.target.value);
+    setEditingTodo({ ...editingTodo, text: e.target.value });
     setNoInput(e.target.value === "" ? true : false);
   }
 
   function addTodo() {
-    if (editingText === "") {
+    if (editingTodo.text === "") {
       setNoInput(true);
       return;
     }
 
-    onAddTodos(editingText);
-    setNoInput(false);
-    setEditingText("");
+    onAddTodos(editingTodo);
+    setEditingTodo({ id: 0, text: "" });
   }
 
   function updateTodos() {
     if (noInput) return;
+    onUpdateTodos(editingTodo);
+  }
 
-    const todo = {
-      id: editingId,
-      text: editingText,
-    };
-    onUpdateTodos(todo);
+  function deleteTodo() {
+    onDeleteTodo(editingTodo);
   }
 
   function editView() {
     return (
       <>
-        <div className="text">
-          {editingId === 0 ? (
+        <div className="editing">
+          {editingTodo.id === 0 ? (
             <button onClick={() => addTodo()}>新規作成</button>
           ) : (
             <>
               <button onClick={() => updateTodos()}>編集</button>
-              <button onClick={() => onDeleteTodo(editingId)}>削除</button>
+              <button onClick={() => deleteTodo()}>削除</button>
             </>
           )}
         </div>
@@ -70,24 +62,13 @@ export function EditBoard({
   }
 
   return (
-    <div className="row-list">
-      <div className="item">
-        <ViewBoard
-          todos={todos}
-          onSetEditingTodoId={onSetEditingTodoId}
-          editingId={id}
-        />
-      </div>
-      <div className="item">
-        <div className="wrap">
-          <textarea
-            readOnly={login ? false : true}
-            value={editingText}
-            onChange={(e) => updateTextarea(e)}
-          />
-          {login ? editView() : null}
-        </div>
-      </div>
+    <div className="wrap">
+      <textarea
+        readOnly={login ? false : true}
+        value={editingTodo.text}
+        onChange={(e) => updateTextarea(e)}
+      />
+      {login ? editView() : null}
     </div>
   );
 }

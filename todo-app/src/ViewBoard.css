@@ -9,14 +9,14 @@ li .edit-todo {
   text-decoration: underline;
 }
 
-.UniqueLink {
+.unique-link {
   color: blue;
   background-color: transparent;
   border: none;
   text-align: left;
 }
 
-.NoLink {
+.no-link {
   color: black;
   background-color: transparent;
   text-decoration: none;
