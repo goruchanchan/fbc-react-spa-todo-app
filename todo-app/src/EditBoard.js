@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./EditBoard.css";
 
 export function EditBoard({
@@ -6,18 +6,16 @@ export function EditBoard({
   onAddTodos,
   onUpdateTodos,
   onDeleteTodo,
-  id,
+  selectedTodoId,
 }) {
-  const targetTodo = todos.find((todo) => todo.id === id);
-  const [editingTodo, setEditingTodo] = useState(
-    targetTodo ? targetTodo : { id: 0, text: "" },
-  );
+  const targetTodo = todos.find((todo) => todo.id === selectedTodoId);
+  const [editingTodo, setEditingTodo] = useState({ id: 0, text: "" });
   const [noInput, setNoInput] = useState(false);
 
-  if (id !== editingTodo.id) {
-    setEditingTodo(id !== 0 ? targetTodo : { id: 0, text: "" });
-    setNoInput(null);
-  }
+  useEffect(() => {
+    setEditingTodo(targetTodo ? targetTodo : { id: 0, text: "" });
+    setNoInput(false);
+  }, [targetTodo]);
 
   function updateTextarea(e) {
     setEditingTodo({ ...editingTodo, text: e.target.value });

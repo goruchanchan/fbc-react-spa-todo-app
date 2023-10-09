@@ -61,7 +61,7 @@ export function TodoTable({ localStorageTodos }) {
               onAddTodos={addTodos}
               onUpdateTodos={updateTodos}
               onDeleteTodo={deleteTodo}
-              id={selectedTodoId}
+              selectedTodoId={selectedTodoId}
             />
           </div>
         </div>
