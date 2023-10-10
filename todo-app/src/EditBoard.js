@@ -13,7 +13,7 @@ export function EditBoard({
   const [noInput, setNoInput] = useState(false);
 
   useEffect(() => {
-    setEditingTodo(targetTodo ? targetTodo : { id: 0, text: "" });
+    setEditingTodo(targetTodo || { id: 0, text: "" });
     setNoInput(false);
   }, [targetTodo]);
 
