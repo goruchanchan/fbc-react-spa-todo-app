@@ -3,8 +3,8 @@ import "./ViewBoard.css";
 
 export function ViewBoard({ todos, onSelectTodoId, selectedTodoId = null }) {
   const { login } = useLogin();
-  function extractFirstLine(todo) {
-    return todo.split(/\n/)[0];
+  function extractFirstLine(todoText) {
+    return todoText.split(/\n/)[0];
   }
 
   return (

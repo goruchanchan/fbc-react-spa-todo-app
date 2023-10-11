@@ -7,7 +7,7 @@ import "./TodoTable.css";
 
 export function TodoTable() {
   const jsonData = localStorage.getItem("todos");
-  const localStorageTodos = jsonData == null ? [] : JSON.parse(jsonData);
+  const localStorageTodos = jsonData === null ? [] : JSON.parse(jsonData);
   const [selectedTodoId, setSelectedTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
   const { login, onSetLogin } = useLogin();

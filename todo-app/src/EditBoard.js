@@ -15,13 +15,14 @@ export function EditBoard({
   const { login } = useLogin();
 
   useEffect(() => {
-    setEditingTodo(targetTodo ? targetTodo : { id: 0, text: "" });
+    setEditingTodo(targetTodo || { id: 0, text: "" });
     setNoInput(false);
   }, [targetTodo]);
 
   function updateTextarea(e) {
-    setEditingTodo({ ...editingTodo, text: e.target.value });
-    setNoInput(e.target.value === "" ? true : false);
+    const value = e.target.value;
+    setEditingTodo({ ...editingTodo, text: value });
+    setNoInput(!value);
   }
 
   function addTodo() {
