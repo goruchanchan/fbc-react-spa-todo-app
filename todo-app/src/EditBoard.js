@@ -15,7 +15,7 @@ export function EditBoard({
   const { login } = useLogin();
 
   useEffect(() => {
-    setEditingTodo(targetTodo || { id: 0, text: "" });
+    setEditingTodo(targetTodo ?? { id: 0, text: "" });
     setNoInput(false);
   }, [targetTodo]);
 
