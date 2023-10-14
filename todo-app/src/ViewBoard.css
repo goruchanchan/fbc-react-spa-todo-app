@@ -1,0 +1,25 @@
+li {
+  list-style: none;
+  color: blue;
+  padding-block: 4px;
+  margin-left: 5px;
+}
+
+li .edit-todo {
+  text-decoration: underline;
+}
+
+.unique-link {
+  color: blue;
+  background-color: transparent;
+  border: none;
+  text-align: left;
+}
+
+.no-link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+  border: none;
+  text-align: left;
+}

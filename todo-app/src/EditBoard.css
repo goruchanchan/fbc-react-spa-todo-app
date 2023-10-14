@@ -1,0 +1,32 @@
+.row-list {
+  display: flex;
+  justify-content: left;
+}
+
+.row-list .item {
+  width: 200px;
+}
+
+.wrap {
+  display: flex;
+  flex-flow: column;
+}
+
+textarea {
+  height: 150px;
+  border-radius: 1ch;
+}
+
+.text {
+  margin-top: 5px;
+}
+
+button {
+  border-radius: 1ch;
+  width: 50%;
+}
+
+.error {
+  color: red;
+  margin-top: 5px;
+}
