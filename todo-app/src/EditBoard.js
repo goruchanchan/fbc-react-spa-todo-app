@@ -11,32 +11,34 @@ export function EditBoard({
 }) {
   const targetTodo = todos.find((todo) => todo.id === selectedTodoId);
   const [editingTodo, setEditingTodo] = useState({ id: 0, text: "" });
-  const [noInput, setNoInput] = useState(false);
+  const [inputError, setInputError] = useState(false);
   const { login } = useLogin();
 
   useEffect(() => {
     setEditingTodo(targetTodo ?? { id: 0, text: "" });
-    setNoInput(false);
   }, [targetTodo]);
 
   function updateTextarea(e) {
     const value = e.target.value;
     setEditingTodo({ ...editingTodo, text: value });
-    setNoInput(!value);
+  }
+
+  function isNoInput() {
+    const noInput = editingTodo.text === "";
+    noInput ? setInputError(true) : setInputError(false);
+    return noInput;
   }
 
   function addTodo() {
-    if (editingTodo.text === "") {
-      setNoInput(true);
-      return;
-    }
+    if (isNoInput()) return;
 
     onAddTodos(editingTodo);
     setEditingTodo({ id: null, text: "" });
   }
 
   function updateTodos() {
-    if (noInput) return;
+    if (isNoInput()) return;
+
     onUpdateTodos(editingTodo);
   }
 
@@ -57,7 +59,7 @@ export function EditBoard({
             </>
           )}
         </div>
-        {noInput && <div className="error">空入力は禁止です</div>}
+        {inputError && <div className="error">空入力は禁止です</div>}
       </>
     );
   }
