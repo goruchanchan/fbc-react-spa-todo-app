@@ -4,10 +4,12 @@ const LoginContext = createContext(false);
 
 export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setLogin] = useState(false);
-  const onSetLogin = () => setLogin(!isLoggedIn);
+
+  const onLogin = () => setLogin(true);
+  const onLogout = () => setLogin(false);
 
   return (
-    <LoginContext.Provider value={{ isLoggedIn, onSetLogin }}>
+    <LoginContext.Provider value={{ isLoggedIn, onLogin, onLogout }}>
       {children}
     </LoginContext.Provider>
   );
