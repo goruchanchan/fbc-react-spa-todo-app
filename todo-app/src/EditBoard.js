@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLogin } from "./LoginContext";
+import { useAuth } from "./AuthContext";
 import "./EditBoard.css";
 
 export function EditBoard({
@@ -12,7 +12,7 @@ export function EditBoard({
   const targetTodo = todos.find((todo) => todo.id === selectedTodoId);
   const [editingTodo, setEditingTodo] = useState({ id: 0, text: "" });
   const [inputError, setInputError] = useState(false);
-  const { isLoggedIn } = useLogin();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     setEditingTodo(targetTodo ?? { id: 0, text: "" });

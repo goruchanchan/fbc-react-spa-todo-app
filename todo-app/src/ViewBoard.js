@@ -1,8 +1,8 @@
-import { useLogin } from "./LoginContext";
+import { useAuth } from "./AuthContext";
 import "./ViewBoard.css";
 
 export function ViewBoard({ todos, onSelectTodoId, selectedTodoId = null }) {
-  const { isLoggedIn } = useLogin();
+  const { isLoggedIn } = useAuth();
   function extractFirstLine(todoText) {
     return todoText.split(/\n/)[0];
   }

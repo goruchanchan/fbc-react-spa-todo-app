@@ -1,7 +1,7 @@
 import { ViewBoard } from "./ViewBoard";
 import { EditBoard } from "./EditBoard";
 import { useState, useEffect } from "react";
-import { useLogin } from "./LoginContext";
+import { useAuth } from "./AuthContext";
 
 import "./TodoTable.css";
 
@@ -10,7 +10,7 @@ export function TodoTable() {
   const localStorageTodos = JSON.parse(jsonData) ?? [];
   const [selectedTodoId, setSelectedTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
-  const { isLoggedIn, onLogin, onLogout } = useLogin();
+  const { isLoggedIn, onLogin, onLogout } = useAuth();
 
   useEffect(() => {
     const jsonData = JSON.stringify(todos, undefined, 1);
