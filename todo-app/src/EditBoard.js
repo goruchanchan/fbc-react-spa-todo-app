@@ -12,7 +12,7 @@ export function EditBoard({
   const targetTodo = todos.find((todo) => todo.id === selectedTodoId);
   const [editingTodo, setEditingTodo] = useState({ id: 0, text: "" });
   const [inputError, setInputError] = useState(false);
-  const { login } = useLogin();
+  const { isLoggedIn } = useLogin();
 
   useEffect(() => {
     setEditingTodo(targetTodo ?? { id: 0, text: "" });
@@ -69,11 +69,11 @@ export function EditBoard({
       {selectedTodoId !== null && (
         <>
           <textarea
-            readOnly={login ? false : true}
+            readOnly={isLoggedIn ? false : true}
             value={editingTodo.text}
             onChange={(e) => updateTextarea(e)}
           />
-          {login && viewEditButton()}
+          {isLoggedIn && viewEditButton()}
         </>
       )}
     </div>

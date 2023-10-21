@@ -2,7 +2,7 @@ import { useLogin } from "./LoginContext";
 import "./ViewBoard.css";
 
 export function ViewBoard({ todos, onSelectTodoId, selectedTodoId = null }) {
-  const { login } = useLogin();
+  const { isLoggedIn } = useLogin();
   function extractFirstLine(todoText) {
     return todoText.split(/\n/)[0];
   }
@@ -21,7 +21,7 @@ export function ViewBoard({ todos, onSelectTodoId, selectedTodoId = null }) {
           </button>
         </li>
       ))}
-      {login && (
+      {isLoggedIn && (
         <li>
           <button className={"unique-link"} onClick={() => onSelectTodoId(0)}>
             +

@@ -10,7 +10,7 @@ export function TodoTable() {
   const localStorageTodos = JSON.parse(jsonData) ?? [];
   const [selectedTodoId, setSelectedTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
-  const { login, onSetLogin } = useLogin();
+  const { isLoggedIn, onSetLogin } = useLogin();
 
   useEffect(() => {
     const jsonData = JSON.stringify(todos, undefined, 1);
@@ -38,13 +38,13 @@ export function TodoTable() {
 
   function updateLogin() {
     // 新規作成の編集中にログイン状態が切れた時には、一覧表示状態に戻す
-    if (login && selectedTodoId === 0) setSelectedTodoId(null);
+    if (isLoggedIn && selectedTodoId === 0) setSelectedTodoId(null);
 
     onSetLogin();
   }
 
-  const title = login ? "ログイン済" : "未ログイン";
-  const loginButtonText = login ? "ログアウト" : "ログイン";
+  const title = isLoggedIn ? "ログイン済" : "未ログイン";
+  const loginButtonText = isLoggedIn ? "ログアウト" : "ログイン";
 
   function selectTodoId(id) {
     setSelectedTodoId(id);
