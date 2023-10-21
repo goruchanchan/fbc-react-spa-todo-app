@@ -16,6 +16,7 @@ export function EditBoard({
 
   useEffect(() => {
     setEditingTodo(targetTodo ?? { id: 0, text: "" });
+    setInputError(false);
   }, [targetTodo]);
 
   function updateTextarea(e) {
