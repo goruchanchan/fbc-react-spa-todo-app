@@ -1,6 +1,8 @@
+import { useAuth } from "./AuthContext";
 import "./ViewBoard.css";
 
 export function ViewBoard({ todos, onSelectTodoId, selectedTodoId = null }) {
+  const { isLoggedIn } = useAuth();
   function extractFirstLine(todoText) {
     return todoText.split(/\n/)[0];
   }
@@ -19,11 +21,13 @@ export function ViewBoard({ todos, onSelectTodoId, selectedTodoId = null }) {
           </button>
         </li>
       ))}
-      <li>
-        <button className={"unique-link"} onClick={() => onSelectTodoId(0)}>
-          +
-        </button>
-      </li>
+      {isLoggedIn && (
+        <li>
+          <button className={"unique-link"} onClick={() => onSelectTodoId(0)}>
+            +
+          </button>
+        </li>
+      )}
     </ul>
   );
 }

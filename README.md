@@ -6,12 +6,16 @@
 
 Todo を登録・編集・削除・閲覧できる SPA(Single Page Application) 形式のアプリです。
 
-機能名|できること
----|---
-一覧|登録した ToDo の一覧を確認できます。登録したテキストの一行目が表示されます。
-追加|登録したい ToDo を追加できます。空入力を禁止しています。
-編集|登録した ToDo を編集できます。空入力を禁止しています。
-削除|登録した ToDo を削除できます。
+![image.png](https://www.evernote.com/shard/s400/sh/9584a84e-f584-4152-8cf8-ce32c3318068/PdNIIr3R8vgMqbfRtLwDrp__43Jb2y-qrlIXKv0RuikW5gZW9fmpCFrZCw/deep/0/image.png)
+
+ログイン機能があり、ログインボタンの押下でログイン状態がトグルします。ログイン状態によってできることが変わります。
+
+機能名|できること|ログイン有無
+---|---|---
+一覧|登録した ToDo の一覧を確認できます。登録したテキストの一行目が表示されます。|不要
+追加|登録したい ToDo を追加できます。空入力を禁止しています。|必要
+編集|登録した ToDo を編集できます。空入力を禁止しています。|必要
+削除|登録した ToDo を削除できます。|必要
 
 ## 事前準備
 
@@ -24,7 +28,7 @@ Todo を登録・編集・削除・閲覧できる SPA(Single Page Application) 
 2. 本アプリを任意の場所へクローンします
 
     ```bash
-    git clone https://github.com/goruchanchan/fbc-react-spa-todo-app.git
+    git clone -b feature_context https://github.com/goruchanchan/fbc-react-spa-todo-app.git
     ```
 
 3. 本アプリを実行します
@@ -38,37 +42,46 @@ Todo を登録・編集・削除・閲覧できる SPA(Single Page Application) 
 
     下記のような画面が表示されます。
 
-    ![image.png](https://www.evernote.com/shard/s400/sh/5b5f1c85-c6d9-4223-b328-94baf1c1fefd/THp6Xyr7HggQA6ONeBRQDfpj08J5ooAkX2_18FQv8BW8sQ8Rd0ZETO1pmA/deep/0/image.png)
+    ![image.png](https://www.evernote.com/shard/s400/sh/10f961a5-3d10-4f56-b034-69e2cda53225/t98jkZdWEObFvgqxaBhaDwU6xUIg0_ZZpOWYdO4B3o49NY2z5_zVw2UQnw/deep/0/image.png)
 
 ## 使い方
 
 以下では ToDo アプリの使い方を説明します。
 
-### 一覧
+### 一覧（未ログイン時）
 
 アプリのトップページです。
 
-![image.png](https://www.evernote.com/shard/s400/sh/972f9c23-7de5-48ab-a3c6-ab5c510c342c/qRwezGZwONTuWs-hccZvPBi9g_YOohxEYaP76u03IkFX53W8Qdo7aU3Btg/deep/0/image.png)
+- 未ログイン時
+
+    ![image.png](https://www.evernote.com/shard/s400/sh/10f961a5-3d10-4f56-b034-69e2cda53225/t98jkZdWEObFvgqxaBhaDwU6xUIg0_ZZpOWYdO4B3o49NY2z5_zVw2UQnw/deep/0/image.png)
+
+- ログイン時
+
+    ![image.png](https://www.evernote.com/shard/s400/sh/72106463-7f41-4344-97b5-00aefedae51d/Z5kNTBf4cCSYSorQZOn_PiVYy4Z3uthxf8yqtXjdh4orRzmHJdMNjnbUEw/deep/0/image.png)
 
 ### 追加
 
-1. 一覧画面にて『＋』ボタンをクリック
-2. テキストエリアへ入力
-3. 『新規作成』ボタンをクリック
+1. ログインしてなければ、ボタン押下前にログイン状態にします
+2. 『＋』ボタンをクリック
+3. テキストエリアへ入力
+4. 『新規作成』ボタンをクリック
 
-[![Image from Gyazo](https://i.gyazo.com/0678ced72068d8988d6148dbd2684990.gif)](https://gyazo.com/0678ced72068d8988d6148dbd2684990)
+[![Image from Gyazo](https://i.gyazo.com/1bffd1c6febff6f29bcd4ec75a27fdc2.gif)](https://gyazo.com/1bffd1c6febff6f29bcd4ec75a27fdc2)
 
 ### 編集
 
-1. 一覧画面にて編集したい ToDo ボタンをクリック
-2. テキストエリアへ入力
-3. 『編集』ボタンをクリック
+1. ログインしてなければ、ボタン押下前にログイン状態にします
+2. 編集したい ToDo ボタンをクリック
+3. テキストエリアへ入力
+4. 『編集』ボタンをクリック
   
-[![Image from Gyazo](https://i.gyazo.com/a76ac38e0c6dad08a160a7c1cb88079c.gif)](https://gyazo.com/a76ac38e0c6dad08a160a7c1cb88079c)
+[![Image from Gyazo](https://i.gyazo.com/4966db005848727684e8a38685a42ae5.gif)](https://gyazo.com/4966db005848727684e8a38685a42ae5)
 
 ### 削除
 
-1. 一覧画面にて削除したい ToDo ボタンをクリック
-2. 『削除』ボタンをクリック
+1. ログインしてなければ、ボタン押下前にログイン状態にします
+2. 削除したい ToDo ボタンをクリック
+3. 『削除』ボタンをクリック
 
-[![Image from Gyazo](https://i.gyazo.com/b3bb4d0b569c0793a832ea6f5b1dc551.gif)](https://gyazo.com/b3bb4d0b569c0793a832ea6f5b1dc551)
+[![Image from Gyazo](https://i.gyazo.com/bc81f9eb2eb54abff79554f685287ca1.gif)](https://gyazo.com/bc81f9eb2eb54abff79554f685287ca1)

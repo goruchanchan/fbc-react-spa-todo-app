@@ -1,6 +1,7 @@
 import { ViewBoard } from "./ViewBoard";
 import { EditBoard } from "./EditBoard";
 import { useState, useEffect } from "react";
+import { useAuth } from "./AuthContext";
 
 import "./TodoTable.css";
 
@@ -9,7 +10,7 @@ export function TodoTable() {
   const localStorageTodos = JSON.parse(jsonData) ?? [];
   const [selectedTodoId, setSelectedTodoId] = useState(null);
   const [todos, setTodos] = useState(localStorageTodos);
-  const [isEdit, setIsEdit] = useState(false);
+  const { isLoggedIn, onLogin, onLogout } = useAuth();
 
   useEffect(() => {
     const jsonData = JSON.stringify(todos, undefined, 1);
@@ -26,7 +27,6 @@ export function TodoTable() {
     const newTodo = { ...todo, id: calculateMaxId() + 1 };
     setTodos([...todos, newTodo]);
     setSelectedTodoId(null);
-    setIsEdit(false);
   }
 
   function updateTodos(updatedTodo) {
@@ -36,8 +36,17 @@ export function TodoTable() {
     setTodos(updatedTodos);
   }
 
+  function updateLogin() {
+    // 新規作成の編集中にログイン状態が切れた時には、一覧表示状態に戻す
+    if (isLoggedIn && selectedTodoId === 0) setSelectedTodoId(null);
+
+    isLoggedIn ? onLogout() : onLogin();
+  }
+
+  const title = isLoggedIn ? "ログイン済" : "未ログイン";
+  const loginButtonText = isLoggedIn ? "ログアウト" : "ログイン";
+
   function selectTodoId(id) {
-    id === null ? setIsEdit(false) : setIsEdit(true);
     setSelectedTodoId(id);
   }
 
@@ -45,13 +54,16 @@ export function TodoTable() {
     const updatedTodos = todos.filter((todo) => todo.id !== deleteTodo.id);
     setTodos(updatedTodos);
     setSelectedTodoId(null);
-    setIsEdit(false);
   }
 
   return (
     <div className="todo-table">
-      <h2>{isEdit ? "編集" : "一覧"}</h2>
+      <h2>{title}</h2>
       <div className="board">
+        <div className="login-button">
+          <button onClick={() => updateLogin()}>{loginButtonText}</button>
+        </div>
+
         <div className="row-list">
           <div className="item">
             <ViewBoard
